@@ -6,41 +6,73 @@
     <meta name="theme-color" content="#264653">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Mr. Timothy Apollo Owino Otieno - Educator</title>
+    <title>Mr. Timothy Apollo Owino Otieno - Early Childhood Education Specialist</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <meta name="description" content="Mr. Timothy Apollo Owino Otieno - A dedicated educator committed to excellence in teaching and character development">
-    <meta name="keywords" content="education, teaching, mentorship, character development, academic excellence">
+    <meta name="description" content="Mr. Timothy Apollo Owino Otieno - Expert in early childhood education with over 15 years of experience guiding young learners">
+    <meta name="keywords" content="early childhood education, preschool teacher, early years learning, child development, early education specialist, kindergarten teacher">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div class="particle-container"></div>
-    <nav>
-        <div class="logo">Mr. Timothy Apollo</div>
+    <nav class="main-nav">
+        <div class="nav-brand">
+            <div class="logo">Mr. Timothy Apollo</div>
+            <div class="tagline">Administrator and Teacher of Early Years Learners</div>
+        </div>
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#philosophy">Philosophy</a></li>
-            <li><a href="#resources">Resources</a></li>
-            <li><a href="#blog">Blog</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+
+            <li><a href="#resources" class="nav-link">Resources</a></li>
+            <li><a href="#blog" class="nav-link">Blog</a></li>
+            <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
-        <button class="nav-button" onclick="window.location.href='#contact'">
-            <i class="fas fa-envelope"></i> Schedule Consultation
-        </button>
+        <div class="nav-actions">
+            <button class="cta-button primary">
+                <i class="fas fa-envelope"></i> Schedule Consultation
+            </button>
+            <button class="cta-button secondary" onclick="window.location.href='#resources'">
+                <i class="fas fa-book"></i> Resources
+            </button>
+        </div>
     </nav>
 
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="profile-section">
-                <img src="./Pasted image.png" alt="Mr. Timothy Apollo Owino Otieno" class="profile-image">
-                <h1>Mr. Timothy Apollo Owino Otieno</h1>
+                <div class="profile-image-container">
+                    <img src="./Pasted image.png" alt="Mr. Timothy Apollo Owino Otieno" class="profile-image">
+                </div>
+                <div class="profile-info">
+                    <h1>Mr. Timothy Apollo Owino Otieno</h1>
+                    <p class="title">Administrator and Teacher of Early Years Learners</p>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Years in Early Childhood Education</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">1000+</span>
+                            <span class="stat-label">Young Learners Guided</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="welcome-section">
                 <h2>Guiding Minds, Shaping Futures</h2>
-                <p>With over a decade of experience in education, I'm dedicated to nurturing academic excellence and personal growth. My approach combines rigorous teaching with character development, creating well-rounded individuals ready to make a positive impact on the world.</p>
+                <p class="hero-text">With over a decade of experience in education, I'm dedicated to nurturing academic excellence and personal growth. My approach combines rigorous teaching with character development, creating well-rounded individuals ready to make a positive impact on the world.</p>
+                <div class="hero-cta">
+                    <button class="cta-button primary">
+                        <i class="fas fa-book"></i> View Teaching Philosophy
+                    </button>
+                    <button class="cta-button secondary">
+                        <i class="fas fa-graduation-cap"></i> Explore Resources
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -69,18 +101,7 @@
         </div>
     </section>
 
-    <section id="philosophy" class="philosophy">
-        <h2>Teaching Philosophy</h2>
-        <div class="philosophy-content">
-            <p>My teaching approach is centered around creating a nurturing environment where students can grow both academically and personally. I believe in:</p>
-            <ul>
-                <li>Active student engagement and participation</li>
-                <li>Discipline through understanding and respect</li>
-                <li>Compassionate guidance and support</li>
-                <li>Moral responsibility and ethical leadership</li>
-            </ul>
-        </div>
-    </section>
+
 
     <section id="resources" class="resources">
         <h2>Classroom Resources</h2>

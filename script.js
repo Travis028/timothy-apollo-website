@@ -1,3 +1,38 @@
+// Add gradient animation
+const colors = [
+    '#f0fdf4',  // Soft Green
+    '#fff1f0',  // Soft Red
+    '#fdf4ff',  // Soft Pink
+    '#f0fdf4',  // Soft Green
+    '#fff1f0',  // Soft Red
+    '#fdf4ff'   // Soft Pink
+];
+
+let currentColorIndex = 0;
+const gradientElement = document.createElement('div');
+gradientElement.className = 'background-gradient';
+document.body.appendChild(gradientElement);
+
+function updateGradient() {
+    const nextColorIndex = (currentColorIndex + 1) % colors.length;
+    const currentColor = colors[currentColorIndex];
+    const nextColor = colors[nextColorIndex];
+    
+    gradientElement.style.background = `linear-gradient(
+        135deg,
+        ${currentColor} 0%,
+        ${nextColor} 100%
+    )`;
+    
+    currentColorIndex = nextColorIndex;
+}
+
+// Update gradient every 5 seconds
+setInterval(updateGradient, 5000);
+
+// Initial gradient
+updateGradient();
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

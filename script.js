@@ -1,38 +1,3 @@
-// Add gradient animation
-const colors = [
-    '#f0fdf4',  // Soft Green
-    '#fff1f0',  // Soft Red
-    '#fdf4ff',  // Soft Pink
-    '#f0fdf4',  // Soft Green
-    '#fff1f0',  // Soft Red
-    '#fdf4ff'   // Soft Pink
-];
-
-let currentColorIndex = 0;
-const gradientElement = document.createElement('div');
-gradientElement.className = 'background-gradient';
-document.body.appendChild(gradientElement);
-
-function updateGradient() {
-    const nextColorIndex = (currentColorIndex + 1) % colors.length;
-    const currentColor = colors[currentColorIndex];
-    const nextColor = colors[nextColorIndex];
-    
-    gradientElement.style.background = `linear-gradient(
-        135deg,
-        ${currentColor} 0%,
-        ${nextColor} 100%
-    )`;
-    
-    currentColorIndex = nextColorIndex;
-}
-
-// Update gradient every 5 seconds
-setInterval(updateGradient, 5000);
-
-// Initial gradient
-updateGradient();
-
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -40,129 +5,82 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
             target.scrollIntoView({
-                behavior: 'smooth'
+                behavior: 'smooth',
+                block: 'start'
             });
         }
     });
 });
 
-// Particle Effect
-const particleContainer = document.querySelector('.particle-container');
-
-function createParticle(x, y) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    
-    // Random size
-    const size = Math.random() * 5 + 2;
-    particle.style.width = `${size}px`;
-    particle.style.height = `${size}px`;
-    
-    // Random position
-    particle.style.left = `${x}px`;
-    particle.style.top = `${y}px`;
-    
-    // Random color from our gradient colors
-    const colors = ['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51'];
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    particle.style.backgroundColor = color;
-    
-    // Random animation duration
-    const duration = Math.random() * 2 + 1;
-    particle.style.animationDuration = `${duration}s`;
-    
-    // Random direction
-    const direction = Math.random() * 360;
-    particle.style.transform = `rotate(${direction}deg)`;
-    
-    particleContainer.appendChild(particle);
-    
-    // Remove particle after animation
-    setTimeout(() => {
-        particle.remove();
-    }, duration * 1000);
-}
-
-// Create particles on scroll
+// Navbar scroll effect
 window.addEventListener('scroll', () => {
-    for (let i = 0; i < 3; i++) {
-        const x = Math.random() * window.innerWidth;
-        const y = window.innerHeight;
-        createParticle(x, y);
+    const nav = document.querySelector('.main-nav');
+    if (window.scrollY > 50) {
+        nav.style.background = 'rgba(255, 255, 255, 0.98)';
+        nav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+    } else {
+        nav.style.background = 'rgba(255, 255, 255, 0.95)';
+        nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.08)';
     }
 });
 
-// Create initial particles
-for (let i = 0; i < 50; i++) {
-    createParticle(
-        Math.random() * window.innerWidth,
-        Math.random() * window.innerHeight
-    );
-}
-
-// Navbar background change on scroll
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    const currentScroll = window.scrollY;
-    
-    if (currentScroll > lastScroll) {
-        nav.style.transform = 'translateY(-100%)';
-    } else {
-        nav.style.transform = 'translateY(0)';
-    }
-    
-    lastScroll = currentScroll;
-    
-    if (currentScroll > 50) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
-    }
-});
-
-// Form submission handling
+// Form submission
 const contactForm = document.getElementById('contact-form');
-const errorMessage = document.getElementById('error-message');
-
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
-        const phone = document.getElementById('phone').value.trim();
         const message = document.getElementById('message').value.trim();
         
-        // Reset error message
-        errorMessage.textContent = '';
-        
-        // Validate email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            errorMessage.textContent = 'Please enter a valid email address.';
+        if (!name || !email || !message) {
+            alert('Please fill in all required fields.');
             return;
         }
         
-        // Validate phone number if provided
-        if (phone) {
-            const phoneRegex = /^\+?\d{10,15}$/;
-            if (!phoneRegex.test(phone)) {
-                errorMessage.textContent = 'Please enter a valid phone number.';
-                return;
-            }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address.');
+            return;
         }
         
-        // Here you would typically send the form data to a server
-        alert('Thank you for your message! I will get back to you soon.');
-        this.reset();
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const phone = document.getElementById('phone').value.trim();
+        
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+        
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email, phone, message })
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok) {
+                alert('Thank you for your message! I will get back to you soon.');
+                this.reset();
+            } else {
+                alert(result.error || 'Failed to send message. Please try again.');
+            }
+        } catch (error) {
+            alert('Failed to send message. Please try again.');
+        } finally {
+            submitBtn.textContent = 'Send Message';
+            submitBtn.disabled = false;
+        }
     });
 }
 
-// Add scroll animation to sections
-const sections = document.querySelectorAll('section');
+// Scroll animations
 const observerOptions = {
-    threshold: 0.2
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -174,21 +92,10 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-sections.forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(20px)';
-    section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(section);
-});
-
-// Navbar background change on scroll
-window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    if (window.scrollY > 50) {
-        nav.style.background = 'rgba(255, 255, 255, 0.95)';
-        nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-    } else {
-        nav.style.background = 'white';
-        nav.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
-    }
+// Observe sections and cards
+document.querySelectorAll('section, .value-card, .resource-card, .post-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
 });

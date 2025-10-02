@@ -1,0 +1,12 @@
+{
+  "name": "timothy-apollo-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Timothy Apollo website",
+  "scripts": {
+    "build": "echo 'Frontend build complete'",
+    "start": "npx serve ."
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

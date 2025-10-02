@@ -2,34 +2,36 @@
 
 Professional website for Mr. Timothy Apollo Owino Otieno - Early Childhood Education Specialist
 
-## Setup Instructions
-
-### 1. Install Dependencies
-```bash
-npm install
+## Project Structure
+```
+timothy-apollo-website/
+├── frontend/          # HTML, CSS, JS files
+├── backend/           # Node.js server
+└── README.md
 ```
 
-### 2. Configure Email
-1. Copy `.env.example` to `.env`
-2. Update with your Gmail credentials:
-   - `EMAIL_USER`: Your Gmail address
-   - `EMAIL_PASS`: Your Gmail App Password (not regular password)
+## Setup Instructions
 
-### 3. Gmail App Password Setup
-1. Go to Google Account settings
-2. Enable 2-Factor Authentication
-3. Generate an App Password for "Mail"
-4. Use this App Password in `.env`
-
-### 4. Run the Server
+### Backend Setup
 ```bash
+cd backend
+npm install
+cp .env.example .env
+# Edit .env with Gmail credentials
 npm start
 ```
 
-Visit `http://localhost:3000` to view the website.
-
-## Contact Form
-The contact form sends emails directly to `apollotimothy13@gmail.com` when visitors submit messages.
+### Frontend Setup (Development)
+```bash
+cd frontend
+npm install
+npm start
+```
 
 ## Deployment
-For production deployment, set environment variables on your hosting platform (Heroku, Vercel, etc.).
+- **Frontend**: Deploy to Netlify/Vercel
+- **Backend**: Deploy to Heroku/Railway
+- **Full-stack**: Deploy backend, point frontend API calls to backend URL
+
+## Contact Form
+Messages sent to: apollotimothy13@gmail.com

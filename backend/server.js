@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('.'));
+app.use(express.static('../frontend'));
 
 // Email configuration
 const transporter = nodemailer.createTransporter({
@@ -53,7 +53,7 @@ app.post('/api/contact', async (req, res) => {
 
 // Serve the website
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 app.listen(PORT, () => {
